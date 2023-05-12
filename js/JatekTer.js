@@ -1,4 +1,5 @@
 import Lampa from "./Lampa.js";
+import InfoPanel from "./InfoPanel.js";
 
 class Jatekter {
     #db;
@@ -6,7 +7,7 @@ class Jatekter {
     #meret;
     #lepes;
 
-    constructor () {
+    constructor() {
         this.#meret = 3;
         this.#db = this.#meret * this.#meret;
         const MAINELEM = $("main");
@@ -15,35 +16,44 @@ class Jatekter {
             let a = new Lampa(index, bool, MAINELEM);
             this.#setAllapotLista(bool);
         }
+        new InfoPanel(MAINELEM);
 
         $(window).on("kattintas", (event) => {
-            console.log(event.detail);
             this.#szomszedokKeresese(event.detail);
+            if (event.detail == false) {
+                this.#allapotLista[event.detail] = true;
+            } else {
+                this.#allapotLista[event.detail] = false;
+            }
+            if (this.#ellenorzes() == 0) {
+                MAINELEM.html("<p>Nyertél</p><button>Új játék</button>");
+            }
         });
+
     }
 
-    #setAllapotLista (bool) {
+    #setAllapotLista(bool) {
         this.#allapotLista.push(bool);
     }
 
-    #szomszedokKeresese (id) {
-        let szomszedok = [] ;
-        switch (id) {
-            case 0:
-                this.#allapotLista[1] = false;
-                break;
-        
-            default:
-                break;
-        }
+    #szomszedokKeresese(id) {
+
+        console.log(id);
     }
 
     #init() {
-
+        this();
     }
 
     #ellenorzes() {
+        let db = 0;
+        for (let index = 0; index <= this.#allapotLista.length; index++) {
+            if (this.#allapotLista[index] === true) {
+                db++;
+            }
 
+        }
+        return db;
     }
 }
 

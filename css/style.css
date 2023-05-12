@@ -1,0 +1,18 @@
+main {
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+
+.zold {
+    padding: 10px;
+    background-color: green;
+    margin: 3px;
+}
+.piros {
+    padding: 10px;
+    background-color: red;
+    margin: 3px;
+}
